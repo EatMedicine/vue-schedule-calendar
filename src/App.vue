@@ -3,8 +3,9 @@
          class="demo">
         <h1 class="demo-title">Vue Schedule Calendar</h1>
         <schedule-calendar :events="events"
-                            :dateItemRender="itemRender"
+                            :dateItemRender="itemRender" @event-click="onEventClick"
                             @event-dragend="changeDate"></schedule-calendar>
+        <span @click="handleReplace">replace</span>
     </div>
 </template>
 <script>
@@ -16,25 +17,33 @@ export default {
                     id: 111,
                     date: '2017-04-03',
                     text: '老铁，扎心了',
-                    status: 1
+                    status: 1,
+                    show:true,
+                    disabled:false,
                 },
                 {
                     id: 222,
                     date: '2017-04-03',
                     text: '来啊，互相伤害',
-                    status: 2
+                    status: 2,
+                    show:true,
+                    disabled:false,
                 },
                 {
                     id: 333,
                     date: '2017-04-03',
                     text: '这个人好会装逼',
-                    status: 3
+                    status: 3,
+                    show:true,
+                    disabled:false,
                 },
                 {
                     id: 444,
                     date: '2017-04-03',
                     text: '那你很棒哟',
-                    status: 4
+                    status: 4,
+                    show:true,
+                    disabled:false,
                 },
                 {
                     id: 555,
@@ -46,7 +55,9 @@ export default {
                     id: 666,
                     date: '2017-04-09',
                     text: '老铁，扎心了',
-                    status: 6
+                    status: 6,
+                    show:true,
+                    disabled:false,
                 },
                 {
                     id: 777,
@@ -58,19 +69,25 @@ export default {
                     id: 888,
                     date: '2017-04-09',
                     text: '这个人好会装逼',
-                    status: 8
+                    status: 8,
+                    show:true,
+                    disabled:false,
                 },
                 {
                     id: 999,
                     date: '2017-04-09',
                     text: '那你很棒哟',
-                    status: 9
+                    status: 9,
+                    show:true,
+                    disabled:false,
                 },
                 {
                     id: 1010,
                     date: '2017-04-09',
                     text: '我表示很无奈',
-                    status: 10
+                    status: 10,
+                    show:true,
+                    disabled:false,
                 }
             ],
             itemRender(item) {
@@ -86,6 +103,90 @@ export default {
                 ...this.events[updateIndex],
                 date
             })
+        },
+        onEventClick(e,item){
+            console.log("on Event Click",item);
+            item.isDisable = !item.isDisable;
+        },
+        handleReplace(){
+            this.events = [
+                {
+                    id: 111,
+                    date: '2017-04-03',
+                    text: '老铁，扎心了111',
+                    status: 1,
+                    show:true,
+                    disabled:false,
+                },
+                {
+                    id: 222,
+                    date: '2017-04-03',
+                    text: '来啊，互相伤害111',
+                    status: 2,
+                    show:true,
+                    disabled:false,
+                },
+                {
+                    id: 333,
+                    date: '2017-04-03',
+                    text: '这个人好会装逼111',
+                    status: 3,
+                    show:true,
+                    disabled:false,
+                },
+                {
+                    id: 444,
+                    date: '2017-04-03',
+                    text: '那你很棒哟111',
+                    status: 4,
+                    show:true,
+                    disabled:false,
+                },
+                {
+                    id: 555,
+                    date: '2017-04-03',
+                    text: '我表示很无奈1111',
+                    status: 5
+                },
+                {
+                    id: 666,
+                    date: '2017-04-09',
+                    text: '老铁，扎心了111',
+                    status: 6,
+                    show:true,
+                    disabled:false,
+                },
+                {
+                    id: 777,
+                    date: '2017-04-09',
+                    text: '来啊，互相伤害111',
+                    status: 7
+                },
+                {
+                    id: 888,
+                    date: '2017-04-09',
+                    text: '这个人好会装逼111',
+                    status: 8,
+                    show:true,
+                    disabled:false,
+                },
+                {
+                    id: 999,
+                    date: '2017-04-09',
+                    text: '那你很棒哟',
+                    status: 9,
+                    show:true,
+                    disabled:false,
+                },
+                {
+                    id: 1010,
+                    date: '2017-04-09',
+                    text: '我表示很无奈',
+                    status: 10,
+                    show:true,
+                    disabled:false,
+                }
+            ]
         }
     },
     created() {

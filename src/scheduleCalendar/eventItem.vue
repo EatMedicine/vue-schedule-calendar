@@ -1,12 +1,23 @@
+<template>
+<div :id="'eventItem'+_uid" :class="divClass" :draggable="true" @dragstart="onDrag" @click="onClick" v-if="isShow">
+    <span>{{item.text}}</span>
+</div>
+</template>
 <script>
 import { EventBus } from './utils'
 
 export default {
+    data(){
+        return {
+            isDisable:false,
+            isShow:true,
+        }
+    },
     props: {
         item: Object,
         date: Date,
         type: String,
-        itemRender: Function
+        itemRender: Function,
     },
     methods: {
         onDrag(e) {
@@ -15,20 +26,22 @@ export default {
         onClick(e) {
             e.stopPropagation()
             e.preventDefault()
-            EventBus.$emit('item-click', e, this.item)
+            EventBus.$emit('item-click', e, this)
         }
     },
-    render(h) {
-        return h('div', {
-            class: ['schedule-calendar-detail-item', `schedule-calendar-status_${this.item.status}`],
-            attrs: {
-                draggable: true
-            },
-            on: {
-                dragstart: this.onDrag,
-                click: this.onClick
+    mounted(){
+        this.isDisable = this.item.disabled || false;
+        this.isShow = this.item.show || true;
+    },
+    computed:{
+        divClass:function(){
+            let obj = {
+                'schedule-calendar-detail-item':true,
+                'schedule-calendar-disabled':this.isDisable,
             }
-        }, this.itemRender ? [this.itemRender(this.item)] : [h('span', this.item.text)])
+            obj[`schedule-calendar-status_${this.item.status}`] = true;
+            return obj;
+        },
     }
 }
 </script>
@@ -88,6 +101,9 @@ export default {
     }
     &status_10 {
         background: #607d8b;
+    }
+    &disabled{
+        background: gray;
     }
 }
 

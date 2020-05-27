@@ -19,14 +19,15 @@
             <div v-show="expanded"
                  class="schedule-calendar-details-hd">{{ dateString }}</div>
             <div class="schedule-calendar-details-bd">
-                <event-item v-if="details.length"
-                            v-for="item in displayDetails"
-                            :item="item"
-                            :date="date"
-                            :type="type"
-                            :itemRender="itemRender"
-                            @item-dragstart="dragItem"
-                            :key="item.id"></event-item>
+                <div v-for="(item, index) in details" :key="item.id">
+                    <event-item v-show="details.length&&index<volume||expanded"
+                                :item="item"
+                                :date="date"
+                                :type="type"
+                                :itemRender="itemRender"
+                                @item-dragstart="dragItem"
+                                ></event-item>
+                </div>
             </div>
         </div>
     </div>
@@ -58,7 +59,13 @@ export default {
             return isSameDay(new Date(), this.date)
         },
         details() {
-            return this.data.length ? this.data.filter(item => isSameDay(item.date, this.date)) : []
+
+            let tmp = this.data.length ? this.data.filter(item => {
+                
+                let isSame = isSameDay(item.date, this.date);
+                return isSame;
+            }) : [];
+            return tmp;
         },
         displayDetails() {
             return this.expanded ? this.details : this.details.slice(0, this.volume)

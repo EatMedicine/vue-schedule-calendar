@@ -63,7 +63,7 @@ export default {
             this.$emit('event-dragend', e, this.dragItem, date)
         },
         itemClick(e, item) {
-            console.log('[event-click]:', item)
+            console.log('[event-click]:',e, item)
             this.$emit('event-click', e, item)
         },
         dateClick(e, date) {
