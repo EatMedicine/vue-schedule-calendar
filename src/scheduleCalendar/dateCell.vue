@@ -65,6 +65,9 @@ export default {
                 let isSame = isSameDay(item.date, this.date);
                 return isSame;
             }) : [];
+            tmp.sort((v1,v2)=>{
+                return v1.status-v2.status;
+            })
             return tmp;
         },
         displayDetails() {
