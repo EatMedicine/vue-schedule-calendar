@@ -1,6 +1,7 @@
 <template>
 <div :id="'eventItem'+_uid" :class="divClass" :draggable="true" @dragstart="onDrag" @click="onClick" v-if="isShow">
     <span>{{item.text}}</span>
+    <span class="delete_btn" @click="onDeleteClick">x</span>
 </div>
 </template>
 <script>
@@ -11,6 +12,7 @@ export default {
         return {
             isDisable:false,
             isShow:true,
+            isShowDelete:true,
         }
     },
     props: {
@@ -27,11 +29,17 @@ export default {
             e.stopPropagation()
             e.preventDefault()
             EventBus.$emit('item-click', e, this)
+        },
+        onDeleteClick(e){
+            e.stopPropagation();
+            e.preventDefault();
+            EventBus.$emit('item-delete',e,this)
         }
     },
     mounted(){
         this.isDisable = this.item.disabled || false;
         this.isShow = this.item.show || true;
+        this.isShowDelete = this.item.showDelete||true;
     },
     computed:{
         divClass:function(){
@@ -47,6 +55,14 @@ export default {
 </script>
 <style lang="less">
 @import "./variables.less";
+.delete_btn{
+    float:right;
+    transition: all 0.2s;
+    &:hover{
+        font-size: 15px;
+    }
+}
+
 
 .schedule-calendar- {
     &detail-item {

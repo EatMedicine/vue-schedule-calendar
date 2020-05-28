@@ -66,6 +66,10 @@ export default {
             console.log('[event-click]:',e, item)
             this.$emit('event-click', e, item)
         },
+        itemDelete(e,item){
+            console.log("[item-delete]:",e,item)
+            this.$emit('item-delete',e,item)
+        },
         dateClick(e, date) {
             console.log('[date-click]:', date)
             this.$emit('date-click', e, date)
@@ -77,6 +81,7 @@ export default {
         EventBus.$on('item-drop', this.itemDrop)
         EventBus.$on('item-click', this.itemClick)
         EventBus.$on('date-click', this.dateClick)
+        EventBus.$on('item-delete', this.itemDelete)
     },
     destoryed() {
         EventBus.$off()

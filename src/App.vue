@@ -4,7 +4,7 @@
         <h1 class="demo-title">Vue Schedule Calendar</h1>
         <schedule-calendar :events="events"
                             :dateItemRender="itemRender" @event-click="onEventClick"
-                            @event-dragend="changeDate"></schedule-calendar>
+                            @event-dragend="changeDate" @item-delete="onItemDelete"></schedule-calendar>
         <span @click="handleReplace">replace</span>
     </div>
 </template>
@@ -15,7 +15,7 @@ export default {
             events: [
                 {
                     id: 111,
-                    date: '2017-04-03',
+                    date: '2020-05-03',
                     text: '老铁，扎心了',
                     status: 1,
                     show:true,
@@ -23,7 +23,7 @@ export default {
                 },
                 {
                     id: 222,
-                    date: '2017-04-03',
+                    date: '2020-05-03',
                     text: '来啊，互相伤害',
                     status: 2,
                     show:true,
@@ -31,7 +31,7 @@ export default {
                 },
                 {
                     id: 333,
-                    date: '2017-04-03',
+                    date: '2020-05-03',
                     text: '这个人好会装逼',
                     status: 3,
                     show:true,
@@ -39,7 +39,7 @@ export default {
                 },
                 {
                     id: 444,
-                    date: '2017-04-03',
+                    date: '2020-05-03',
                     text: '那你很棒哟',
                     status: 4,
                     show:true,
@@ -47,13 +47,13 @@ export default {
                 },
                 {
                     id: 555,
-                    date: '2017-04-03',
+                    date: '2020-05-03',
                     text: '我表示很无奈',
                     status: 5
                 },
                 {
                     id: 666,
-                    date: '2017-04-09',
+                    date: '2020-05-09',
                     text: '老铁，扎心了',
                     status: 6,
                     show:true,
@@ -61,13 +61,13 @@ export default {
                 },
                 {
                     id: 777,
-                    date: '2017-04-09',
+                    date: '2020-05-09',
                     text: '来啊，互相伤害',
                     status: 7
                 },
                 {
                     id: 888,
-                    date: '2017-04-09',
+                    date: '2020-05-09',
                     text: '这个人好会装逼',
                     status: 8,
                     show:true,
@@ -75,7 +75,7 @@ export default {
                 },
                 {
                     id: 999,
-                    date: '2017-04-09',
+                    date: '2020-05-09',
                     text: '那你很棒哟',
                     status: 9,
                     show:true,
@@ -83,7 +83,7 @@ export default {
                 },
                 {
                     id: 1010,
-                    date: '2017-04-09',
+                    date: '2020-05-09',
                     text: '我表示很无奈',
                     status: 10,
                     show:true,
@@ -108,11 +108,14 @@ export default {
             console.log("on Event Click",item);
             item.isDisable = !item.isDisable;
         },
+        onItemDelete(e,item){
+            console.log("on Item Delete",item);
+        },
         handleReplace(){
             this.events = [
                 {
                     id: 111,
-                    date: '2017-04-03',
+                    date: '2020-05-03',
                     text: '老铁，扎心了111',
                     status: 1,
                     show:true,
@@ -120,7 +123,7 @@ export default {
                 },
                 {
                     id: 222,
-                    date: '2017-04-03',
+                    date: '2020-05-03',
                     text: '来啊，互相伤害111',
                     status: 2,
                     show:true,
@@ -128,7 +131,7 @@ export default {
                 },
                 {
                     id: 333,
-                    date: '2017-04-03',
+                    date: '2020-05-03',
                     text: '这个人好会装逼111',
                     status: 3,
                     show:true,
@@ -136,7 +139,7 @@ export default {
                 },
                 {
                     id: 444,
-                    date: '2017-04-03',
+                    date: '2020-05-03',
                     text: '那你很棒哟111',
                     status: 4,
                     show:true,
@@ -144,13 +147,13 @@ export default {
                 },
                 {
                     id: 555,
-                    date: '2017-04-03',
+                    date: '2020-05-03',
                     text: '我表示很无奈1111',
                     status: 5
                 },
                 {
                     id: 666,
-                    date: '2017-04-09',
+                    date: '2020-05-09',
                     text: '老铁，扎心了111',
                     status: 6,
                     show:true,
@@ -158,13 +161,13 @@ export default {
                 },
                 {
                     id: 777,
-                    date: '2017-04-09',
+                    date: '2020-05-09',
                     text: '来啊，互相伤害111',
                     status: 7
                 },
                 {
                     id: 888,
-                    date: '2017-04-09',
+                    date: '2020-05-09',
                     text: '这个人好会装逼111',
                     status: 8,
                     show:true,
@@ -172,7 +175,7 @@ export default {
                 },
                 {
                     id: 999,
-                    date: '2017-04-09',
+                    date: '2020-05-09',
                     text: '那你很棒哟',
                     status: 9,
                     show:true,
@@ -180,7 +183,7 @@ export default {
                 },
                 {
                     id: 1010,
-                    date: '2017-04-09',
+                    date: '2020-05-09',
                     text: '我表示很无奈',
                     status: 10,
                     show:true,
